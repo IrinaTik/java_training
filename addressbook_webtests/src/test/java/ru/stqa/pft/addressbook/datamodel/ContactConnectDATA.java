@@ -1,4 +1,4 @@
-package ru.stqa.pft.addressbook;
+package ru.stqa.pft.addressbook.datamodel;
 
 public class ContactConnectDATA {
   private final String address;

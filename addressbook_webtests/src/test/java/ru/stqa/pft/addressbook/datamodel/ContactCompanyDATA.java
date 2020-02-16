@@ -1,4 +1,4 @@
-package ru.stqa.pft.addressbook;
+package ru.stqa.pft.addressbook.datamodel;
 
 public class ContactCompanyDATA {
   private final String title;
