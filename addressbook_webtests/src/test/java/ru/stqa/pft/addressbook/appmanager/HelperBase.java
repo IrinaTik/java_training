@@ -35,4 +35,12 @@ public class HelperBase {
     new Select(wb.findElement(locator)).selectByVisibleText(text);
     click(By.xpath("//option[@value='" + text + "']"));
   }
+
+  public void alertAccept() {
+    wb.switchTo().alert().accept();
+  }
+
+  public void select() {
+    click(By.name("selected[]"));
+  }
 }
