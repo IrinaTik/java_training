@@ -22,6 +22,10 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("(//input[@name='submit'])[2]"));
   }
 
+  public void returnToHomepage() {
+    click(By.linkText("home page"));
+  }
+
   public void fillContactForm(ContactPersonalDATA contactPersonalDATA, boolean creation) {
     type(By.name("firstname"), contactPersonalDATA.getFirstname());
     type(By.name("middlename"), contactPersonalDATA.getMiddlename());

@@ -14,7 +14,7 @@ public class ContactModificationTests extends TestBase {
     app.getContactHelper().fillContactForm(new ContactPersonalDATA("4", "5", "6", "wasd", new ContactCompanyDATA("qweh", "qwwerrttty", "notfound", null),
             new ContactConnectDATA("moscow", "12345", "123456789", "hard", "mail1", "mail2", "mail3", "localhost", "address1", "fortress"), "1", "March", "1980", "i am the new god"), false);
     app.getContactHelper().submitContactModification();
-    app.getNavigationHelper().returnToHomepage();
+    app.getContactHelper().returnToHomepage();
   }
 
 }

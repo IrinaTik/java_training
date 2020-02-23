@@ -60,4 +60,8 @@ public class HelperBase {
     }
 
   }
+
+  public boolean isThereAThing() {
+    return isElementPresent(By.name("selected[]"));
+  }
 }
