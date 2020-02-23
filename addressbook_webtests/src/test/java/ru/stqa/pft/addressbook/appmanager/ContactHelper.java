@@ -5,6 +5,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import ru.stqa.pft.addressbook.datamodel.ContactCompanyDATA;
+import ru.stqa.pft.addressbook.datamodel.ContactConnectDATA;
 import ru.stqa.pft.addressbook.datamodel.ContactPersonalDATA;
 
 public class ContactHelper extends HelperBase {
@@ -69,5 +71,12 @@ public class ContactHelper extends HelperBase {
 
   public void deleteSelectedContacts() {
     click(By.xpath("//input[@value='Delete']"));
+  }
+
+  public void createContact(ContactPersonalDATA contact) {
+    initContactCreation();
+    fillContactForm(contact, true);
+    submitFilledContactForm();
+    returnToHomepage();
   }
 }
