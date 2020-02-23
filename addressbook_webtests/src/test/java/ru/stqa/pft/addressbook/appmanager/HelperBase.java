@@ -2,6 +2,7 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -48,5 +49,15 @@ public class HelperBase {
 
   public void select() {
     click(By.name("selected[]"));
+  }
+
+  protected boolean isElementPresent(By locator) {
+    try {
+      wb.findElement(locator);
+      return true;
+    } catch (NoSuchElementException ex) {
+      return false;
+    }
+
   }
 }

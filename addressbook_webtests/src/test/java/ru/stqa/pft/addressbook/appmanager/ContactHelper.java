@@ -1,7 +1,10 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.datamodel.ContactPersonalDATA;
 
 public class ContactHelper extends HelperBase {
@@ -19,7 +22,7 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("(//input[@name='submit'])[2]"));
   }
 
-  public void fillContactForm(ContactPersonalDATA contactPersonalDATA) {
+  public void fillContactForm(ContactPersonalDATA contactPersonalDATA, boolean creation) {
     type(By.name("firstname"), contactPersonalDATA.getFirstname());
     type(By.name("middlename"), contactPersonalDATA.getMiddlename());
     type(By.name("lastname"), contactPersonalDATA.getLastname());
@@ -40,6 +43,13 @@ public class ContactHelper extends HelperBase {
     chooseFromList(By.name("bmonth"), contactPersonalDATA.getBirthMonth());
 
     type(By.name("byear"), contactPersonalDATA.getBirthYear());
+
+    if (creation) {
+      new Select(wb.findElement(By.name("new_group"))).selectByVisibleText(contactPersonalDATA.getContactCompanyDATA().getGroup());
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
+
     type(By.name("address2"), contactPersonalDATA.getContactConnectDATA().getAddressSecondary());
     type(By.name("phone2"), contactPersonalDATA.getContactConnectDATA().getPhoneSecondary());
     type(By.name("notes"), contactPersonalDATA.getNote());
