@@ -36,7 +36,7 @@ public class ApplicationManager {
     }
 
     wb.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-    wb.get("http://localhost/addressbook/group.php");
+    wb.get("http://localhost/addressbook");
     groupHelper = new GroupHelper(wb);
     contactHelper = new ContactHelper(wb);
     navigationHelper = new NavigationHelper(wb);
