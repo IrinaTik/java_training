@@ -47,8 +47,8 @@ public class HelperBase {
     wb.switchTo().alert().accept();
   }
 
-  public void select() {
-    click(By.name("selected[]"));
+  public void select(int index) {
+    wb.findElements(By.name("selected[]")).get(index).click();
   }
 
   protected boolean isElementPresent(By locator) {
