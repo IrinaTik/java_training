@@ -28,4 +28,14 @@ public class ContactCompanyDATA {
   public String getGroup() {
     return group;
   }
+
+  @Override
+  public String toString() {
+    return "ContactCompanyDATA{" +
+            "title='" + title + '\'' +
+            ", companyName='" + companyName + '\'' +
+            ", faxNumber='" + faxNumber + '\'' +
+            ", group='" + group + '\'' +
+            '}';
+  }
 }

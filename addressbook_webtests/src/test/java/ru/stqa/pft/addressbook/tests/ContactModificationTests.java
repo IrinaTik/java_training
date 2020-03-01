@@ -6,6 +6,7 @@ import ru.stqa.pft.addressbook.datamodel.ContactCompanyDATA;
 import ru.stqa.pft.addressbook.datamodel.ContactConnectDATA;
 import ru.stqa.pft.addressbook.datamodel.ContactPersonalDATA;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class ContactModificationTests extends TestBase {
@@ -19,13 +20,21 @@ public class ContactModificationTests extends TestBase {
     }
     List<ContactPersonalDATA> before = app.getContactHelper().getContactList();
     app.getContactHelper().initContactModification();
-    app.getContactHelper().fillContactForm(new ContactPersonalDATA("4", "5", "6", "wasd", new ContactCompanyDATA("qweh", "qwwerrttty", "notfound", null),
-            new ContactConnectDATA("moscow", "12345", "123456789", "hard", "mail1", "mail2", "mail3", "localhost", "address1", "fortress"), "1", "March", "1980", "i am the new god"), false);
+    ContactPersonalDATA contact = new ContactPersonalDATA(before.get(0).getId(), "4", "6");
+    app.getContactHelper().fillContactForm(contact, false);
     app.getContactHelper().submitContactModification();
     app.getContactHelper().returnToHomepage();
 
     List<ContactPersonalDATA> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size());
+
+    before.remove(0);
+    before.add(contact);
+
+    Comparator<? super ContactPersonalDATA> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(before, after);
   }
 
 }

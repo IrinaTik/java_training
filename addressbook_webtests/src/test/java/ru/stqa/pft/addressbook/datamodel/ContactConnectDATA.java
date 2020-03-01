@@ -64,4 +64,20 @@ public class ContactConnectDATA {
   public String getPhoneSecondary() {
     return phoneSecondary;
   }
+
+  @Override
+  public String toString() {
+    return "ContactConnectDATA{" +
+            "address='" + address + '\'' +
+            ", homePhone='" + homePhone + '\'' +
+            ", mobilePhone='" + mobilePhone + '\'' +
+            ", workPhone='" + workPhone + '\'' +
+            ", email_1='" + email_1 + '\'' +
+            ", email_2='" + email_2 + '\'' +
+            ", email_3='" + email_3 + '\'' +
+            ", homepage='" + homepage + '\'' +
+            ", addressSecondary='" + addressSecondary + '\'' +
+            ", phoneSecondary='" + phoneSecondary + '\'' +
+            '}';
+  }
 }

@@ -49,12 +49,16 @@ public class ContactHelper extends HelperBase {
     type(By.name("email3"), contactPersonalDATA.getContactConnectDATA().getEmail_3());
     type(By.name("homepage"), contactPersonalDATA.getContactConnectDATA().getHomepage());
 
-    chooseFromList(By.name("bday"), contactPersonalDATA.getBirthDay());
-    chooseFromList(By.name("bmonth"), contactPersonalDATA.getBirthMonth());
+    if (contactPersonalDATA.getBirthDay() != null) {
+      chooseFromList(By.name("bday"), contactPersonalDATA.getBirthDay());
+    }
+    if (contactPersonalDATA.getBirthMonth() != null) {
+      chooseFromList(By.name("bmonth"), contactPersonalDATA.getBirthMonth());
+    }
 
     type(By.name("byear"), contactPersonalDATA.getBirthYear());
 
-    if (creation) {
+    if (creation && contactPersonalDATA.getContactCompanyDATA() != null) {
       new Select(wb.findElement(By.name("new_group"))).selectByVisibleText(contactPersonalDATA.getContactCompanyDATA().getGroup());
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
@@ -95,7 +99,8 @@ public class ContactHelper extends HelperBase {
       List<WebElement> cells = row.findElements(By.tagName("td"));
       String firstname = cells.get(2).getText();
       String lastname = cells.get(1).getText();
-      ContactPersonalDATA contact = new ContactPersonalDATA(firstname, lastname);
+      int id = Integer.parseInt(row.findElement(By.tagName("input")).getAttribute("value"));
+      ContactPersonalDATA contact = new ContactPersonalDATA(id, firstname, lastname);
       contacts.add(contact);
     }
     return contacts;
