@@ -25,6 +25,19 @@ public class ContactPersonalDATA {
     this.note = note;
   }
 
+  public ContactPersonalDATA(String firstname, String lastname) {
+    this.firstname = firstname;
+    this.middlename = null;
+    this.lastname = lastname;
+    this.nick = null;
+    this.contactCompanyDATA = null;
+    this.contactConnectDATA = null;
+    this.birthDay = null;
+    this.birthMonth = null;
+    this.birthYear = null;
+    this.note = null;
+  }
+
   public String getFirstname() {
     return firstname;
   }
