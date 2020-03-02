@@ -45,6 +45,7 @@ public class HelperBase {
 
   public void alertAccept() {
     wb.switchTo().alert().accept();
+    wb.findElement(By.cssSelector("div.msgbox"));
   }
 
   public void select(int index) {
