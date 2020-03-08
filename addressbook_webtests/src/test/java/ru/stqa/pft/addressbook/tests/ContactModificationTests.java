@@ -16,8 +16,11 @@ public class ContactModificationTests extends TestBase {
   public void ensurePreconditions() {
     app.goTo().homepage();
     if (app.contact().list().size() == 0) {
-      app.contact().create(new ContactPersonalDATA("1", "2", "3", "qwer", new ContactCompanyDATA("qweh", "qwwerrttty", "notfound", "test1"),
-              new ContactConnectDATA("moscow", "12345", "123456789", "hard", "mail1", "mail2", "mail3", "localhost", "address1", "fortress"), "20", "March", "1980", "i am the god"));
+      app.contact().create(new ContactPersonalDATA().withFirstname("1").withMiddlename("2").withLastname("3").withNick("qwer")
+              .withContactCompanyDATA(new ContactCompanyDATA().withTitle("qweh").withCompanyName("qwerrrrrrty").withFaxNumber("notfound").withGroup("test1"))
+              .withContactConnectDATA(new ContactConnectDATA().withAddress("moscow").withHomePhone("12345").withMobilePhone("123456789").withWorkPhone("hard")
+                      .withEmail_1("mail1").withEmail_2("mail2").withEmail_3("mail3").withHomepage("localhost").withAddress("address1").withAddressSecondary("fortress").withPhoneSecondary("123"))
+              .withBirthDay("20").withBirthMonth("March").withBirthYear("1980").withNote("i am the god"));
     }
   }
 
@@ -25,7 +28,7 @@ public class ContactModificationTests extends TestBase {
   public void testContactModification(){
     List<ContactPersonalDATA> before = app.contact().list();
     app.contact().initContactModification();
-    ContactPersonalDATA contact = new ContactPersonalDATA(before.get(0).getId(), "4", "6");
+    ContactPersonalDATA contact = new ContactPersonalDATA().withId(before.get(0).getId()).withFirstname("4").withLastname("6");
     app.contact().modify(contact);
 
     List<ContactPersonalDATA> after = app.contact().list();

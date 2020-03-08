@@ -37,17 +37,27 @@ public class ContactHelper extends HelperBase {
     type(By.name("middlename"), contactPersonalDATA.getMiddlename());
     type(By.name("lastname"), contactPersonalDATA.getLastname());
     type(By.name("nickname"), contactPersonalDATA.getNick());
-    type(By.name("title"), contactPersonalDATA.getContactCompanyDATA().getTitle());
-    type(By.name("company"), contactPersonalDATA.getContactCompanyDATA().getCompanyName());
-    type(By.name("address"), contactPersonalDATA.getContactConnectDATA().getAddress());
-    type(By.name("home"), contactPersonalDATA.getContactConnectDATA().getHomePhone());
-    type(By.name("mobile"), contactPersonalDATA.getContactConnectDATA().getMobilePhone());
-    type(By.name("work"), contactPersonalDATA.getContactConnectDATA().getWorkPhone());
-    type(By.name("fax"), contactPersonalDATA.getContactCompanyDATA().getFaxNumber());
-    type(By.name("email"), contactPersonalDATA.getContactConnectDATA().getEmail_1());
-    type(By.name("email2"), contactPersonalDATA.getContactConnectDATA().getEmail_2());
-    type(By.name("email3"), contactPersonalDATA.getContactConnectDATA().getEmail_3());
-    type(By.name("homepage"), contactPersonalDATA.getContactConnectDATA().getHomepage());
+    type(By.name("byear"), contactPersonalDATA.getBirthYear());
+    type(By.name("notes"), contactPersonalDATA.getNote());
+
+    if (! (contactPersonalDATA.getContactCompanyDATA() == null)) {
+      type(By.name("title"), contactPersonalDATA.getContactCompanyDATA().getTitle());
+      type(By.name("company"), contactPersonalDATA.getContactCompanyDATA().getCompanyName());
+      type(By.name("fax"), contactPersonalDATA.getContactCompanyDATA().getFaxNumber());
+    }
+
+    if (! (contactPersonalDATA.getContactConnectDATA() == null)) {
+      type(By.name("address"), contactPersonalDATA.getContactConnectDATA().getAddress());
+      type(By.name("home"), contactPersonalDATA.getContactConnectDATA().getHomePhone());
+      type(By.name("mobile"), contactPersonalDATA.getContactConnectDATA().getMobilePhone());
+      type(By.name("work"), contactPersonalDATA.getContactConnectDATA().getWorkPhone());
+      type(By.name("email"), contactPersonalDATA.getContactConnectDATA().getEmail_1());
+      type(By.name("email2"), contactPersonalDATA.getContactConnectDATA().getEmail_2());
+      type(By.name("email3"), contactPersonalDATA.getContactConnectDATA().getEmail_3());
+      type(By.name("homepage"), contactPersonalDATA.getContactConnectDATA().getHomepage());
+      type(By.name("address2"), contactPersonalDATA.getContactConnectDATA().getAddressSecondary());
+      type(By.name("phone2"), contactPersonalDATA.getContactConnectDATA().getPhoneSecondary());
+    }
 
     if (contactPersonalDATA.getBirthDay() != null) {
       chooseFromList(By.name("bday"), contactPersonalDATA.getBirthDay());
@@ -56,17 +66,12 @@ public class ContactHelper extends HelperBase {
       chooseFromList(By.name("bmonth"), contactPersonalDATA.getBirthMonth());
     }
 
-    type(By.name("byear"), contactPersonalDATA.getBirthYear());
-
     if (creation && contactPersonalDATA.getContactCompanyDATA() != null) {
       new Select(wb.findElement(By.name("new_group"))).selectByVisibleText(contactPersonalDATA.getContactCompanyDATA().getGroup());
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
 
-    type(By.name("address2"), contactPersonalDATA.getContactConnectDATA().getAddressSecondary());
-    type(By.name("phone2"), contactPersonalDATA.getContactConnectDATA().getPhoneSecondary());
-    type(By.name("notes"), contactPersonalDATA.getNote());
   }
 
   public void initContactModification() {
@@ -106,7 +111,7 @@ public class ContactHelper extends HelperBase {
       String firstname = cells.get(2).getText();
       String lastname = cells.get(1).getText();
       int id = Integer.parseInt(row.findElement(By.tagName("input")).getAttribute("value"));
-      ContactPersonalDATA contact = new ContactPersonalDATA(id, firstname, lastname);
+      ContactPersonalDATA contact = new ContactPersonalDATA().withId(id).withFirstname(firstname).withLastname(lastname);
       contacts.add(contact);
     }
     return contacts;

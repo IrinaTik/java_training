@@ -1,18 +1,18 @@
 package ru.stqa.pft.addressbook.datamodel;
 
 public class ContactConnectDATA {
-  private final String address;
-  private final String homePhone;
-  private final String mobilePhone;
-  private final String workPhone;
-  private final String email_1;
-  private final String email_2;
-  private final String email_3;
-  private final String homepage;
-  private final String addressSecondary;
-  private final String phoneSecondary;
+  private String address;
+  private String homePhone;
+  private String mobilePhone;
+  private String workPhone;
+  private String email_1;
+  private String email_2;
+  private String email_3;
+  private String homepage;
+  private String addressSecondary;
+  private String phoneSecondary;
 
-  public ContactConnectDATA(String address, String homePhone, String mobilePhone, String workPhone, String email_1, String email_2, String email_3, String homepage, String addressSecondary, String phoneSecondary) {
+ /* public ContactConnectDATA(String address, String homePhone, String mobilePhone, String workPhone, String email_1, String email_2, String email_3, String homepage, String addressSecondary, String phoneSecondary) {
     this.address = address;
     this.homePhone = homePhone;
     this.mobilePhone = mobilePhone;
@@ -23,7 +23,7 @@ public class ContactConnectDATA {
     this.homepage = homepage;
     this.addressSecondary = addressSecondary;
     this.phoneSecondary = phoneSecondary;
-  }
+  } */
 
   public String getAddress() {
     return address;
@@ -63,6 +63,56 @@ public class ContactConnectDATA {
 
   public String getPhoneSecondary() {
     return phoneSecondary;
+  }
+
+  public ContactConnectDATA withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+
+  public ContactConnectDATA withHomePhone(String homePhone) {
+    this.homePhone = homePhone;
+    return this;
+  }
+
+  public ContactConnectDATA withMobilePhone(String mobilePhone) {
+    this.mobilePhone = mobilePhone;
+    return this;
+  }
+
+  public ContactConnectDATA withWorkPhone(String workPhone) {
+    this.workPhone = workPhone;
+    return this;
+  }
+
+  public ContactConnectDATA withEmail_1(String email_1) {
+    this.email_1 = email_1;
+    return this;
+  }
+
+  public ContactConnectDATA withEmail_2(String email_2) {
+    this.email_2 = email_2;
+    return this;
+  }
+
+  public ContactConnectDATA withEmail_3(String email_3) {
+    this.email_3 = email_3;
+    return this;
+  }
+
+  public ContactConnectDATA withHomepage(String homepage) {
+    this.homepage = homepage;
+    return this;
+  }
+
+  public ContactConnectDATA withAddressSecondary(String addressSecondary) {
+    this.addressSecondary = addressSecondary;
+    return this;
+  }
+
+  public ContactConnectDATA withPhoneSecondary(String phoneSecondary) {
+    this.phoneSecondary = phoneSecondary;
+    return this;
   }
 
   @Override

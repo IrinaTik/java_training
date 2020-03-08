@@ -2,18 +2,18 @@ package ru.stqa.pft.addressbook.datamodel;
 
 public class ContactPersonalDATA {
   private int id;
-  private final String firstname;
-  private final String middlename;
-  private final String lastname;
-  private final String nick;
-  private final ContactCompanyDATA contactCompanyDATA;
-  private final ContactConnectDATA contactConnectDATA;
-  private final String birthDay;
-  private final String birthMonth;
-  private final String birthYear;
-  private final String note;
+  private String firstname;
+  private String middlename;
+  private String lastname;
+  private String nick;
+  private ContactCompanyDATA contactCompanyDATA;
+  private ContactConnectDATA contactConnectDATA;
+  private String birthDay;
+  private String birthMonth;
+  private String birthYear;
+  private String note;
 
-  public ContactPersonalDATA(int id, String firstname, String middlename, String lastname, String nick, ContactCompanyDATA contactCompanyDATA, ContactConnectDATA contactConnectDATA, String birthDay, String birthMonth, String birthYear, String note) {
+ /* public ContactPersonalDATA(int id, String firstname, String middlename, String lastname, String nick, ContactCompanyDATA contactCompanyDATA, ContactConnectDATA contactConnectDATA, String birthDay, String birthMonth, String birthYear, String note) {
     this.id = id;
     this.firstname = firstname;
     this.middlename = middlename;
@@ -55,14 +55,65 @@ public class ContactPersonalDATA {
     this.birthMonth = null;
     this.birthYear = null;
     this.note = null;
-  }
+  } */
 
   public int getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public ContactPersonalDATA withId(int id) {
     this.id = id;
+    return this;
+  }
+
+  public ContactPersonalDATA withFirstname(String firstname) {
+    this.firstname = firstname;
+    return this;
+  }
+
+  public ContactPersonalDATA withMiddlename(String middlename) {
+    this.middlename = middlename;
+    return this;
+  }
+
+  public ContactPersonalDATA withLastname(String lastname) {
+    this.lastname = lastname;
+    return this;
+  }
+
+  public ContactPersonalDATA withNick(String nick) {
+    this.nick = nick;
+    return this;
+  }
+
+  public ContactPersonalDATA withContactCompanyDATA(ContactCompanyDATA contactCompanyDATA) {
+    this.contactCompanyDATA = contactCompanyDATA;
+    return this;
+  }
+
+  public ContactPersonalDATA withContactConnectDATA(ContactConnectDATA contactConnectDATA) {
+    this.contactConnectDATA = contactConnectDATA;
+    return this;
+  }
+
+  public ContactPersonalDATA withBirthDay(String birthDay) {
+    this.birthDay = birthDay;
+    return this;
+  }
+
+  public ContactPersonalDATA withBirthMonth(String birthMonth) {
+    this.birthMonth = birthMonth;
+    return this;
+  }
+
+  public ContactPersonalDATA withBirthYear(String birthYear) {
+    this.birthYear = birthYear;
+    return this;
+  }
+
+  public ContactPersonalDATA withNote(String note) {
+    this.note = note;
+    return this;
   }
 
   public String getFirstname() {
