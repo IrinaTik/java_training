@@ -11,7 +11,9 @@ import ru.stqa.pft.addressbook.datamodel.ContactConnectDATA;
 import ru.stqa.pft.addressbook.datamodel.ContactPersonalDATA;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -99,12 +101,32 @@ public class ContactHelper extends HelperBase {
     returnToHomepage();
   }
 
+  public void delete(ContactPersonalDATA deletedContact) {
+    selectById(deletedContact.getId());
+    deleteSelectedContacts();
+    alertAccept();
+  }
+
   public int getContactCount() {
     return wb.findElements(By.name("selected[]")).size();
   }
 
   public List<ContactPersonalDATA> list() {
     List<ContactPersonalDATA> contacts = new ArrayList<ContactPersonalDATA>();
+    List<WebElement> rows = wb.findElements(By.name("entry"));
+    for (WebElement row : rows) {
+      List<WebElement> cells = row.findElements(By.tagName("td"));
+      String firstname = cells.get(2).getText();
+      String lastname = cells.get(1).getText();
+      int id = Integer.parseInt(row.findElement(By.tagName("input")).getAttribute("value"));
+      ContactPersonalDATA contact = new ContactPersonalDATA().withId(id).withFirstname(firstname).withLastname(lastname);
+      contacts.add(contact);
+    }
+    return contacts;
+  }
+
+  public Set<ContactPersonalDATA> all() {
+    Set<ContactPersonalDATA> contacts = new HashSet<ContactPersonalDATA>();
     List<WebElement> rows = wb.findElements(By.name("entry"));
     for (WebElement row : rows) {
       List<WebElement> cells = row.findElements(By.tagName("td"));
