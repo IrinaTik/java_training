@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.datamodel.ContactCompanyDATA;
 import ru.stqa.pft.addressbook.datamodel.ContactConnectDATA;
 import ru.stqa.pft.addressbook.datamodel.ContactPersonalDATA;
-
 import java.util.Comparator;
 import java.util.List;
 
