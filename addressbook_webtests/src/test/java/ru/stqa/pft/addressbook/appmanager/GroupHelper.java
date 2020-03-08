@@ -49,7 +49,14 @@ public class GroupHelper extends HelperBase{
     fillGroupForm(group);
     submitCreation();
     returnToGroupPage();
+  }
 
+  public void modifyGroup(int index, GroupData group) {
+    select(index);
+    initGroupModification();
+    fillGroupForm(group);
+    submitGroupModification();
+    returnToGroupPage();
   }
 
   public int getGroupCount() {
