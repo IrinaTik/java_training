@@ -1,18 +1,19 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.datamodel.ContactCompanyDATA;
 import ru.stqa.pft.addressbook.datamodel.ContactConnectDATA;
 import ru.stqa.pft.addressbook.datamodel.ContactPersonalDATA;
+import ru.stqa.pft.addressbook.datamodel.Contacts;
 
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
 
   @Test
   public void testContactCreation() throws Exception {
-    Set<ContactPersonalDATA> before = app.contact().all();
+    Contacts before = app.contact().all();
     ContactPersonalDATA contact = new ContactPersonalDATA().withFirstname("1").withMiddlename("2").withLastname("3").withNick("qwer")
             .withContactCompanyDATA(new ContactCompanyDATA().withTitle("qweh").withCompanyName("qwerrrrrrty").withFaxNumber("notfound").withGroup("test1"))
             .withContactConnectDATA(new ContactConnectDATA().withAddress("moscow").withHomePhone("12345").withMobilePhone("123456789").withWorkPhone("hard")
@@ -20,13 +21,10 @@ public class ContactCreationTests extends TestBase {
             .withBirthDay("20").withBirthMonth("March").withBirthYear("1980").withNote("i am the god");
     app.contact().create(contact);
     app.goTo().homepage();
-    Set<ContactPersonalDATA>  after = app.contact().all();
-    Assert.assertEquals(after.size(), before.size() + 1);
+    Contacts  after = app.contact().all();
 
-    contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt());
-    before.add(contact);
-
-    Assert.assertTrue(before.equals(after)); //assertEquals сравнивает все поля, а нам надо только id и имя\фамилия, поэтому используем функцию из класса
+    assertThat(after.size(), equalTo(before.size() + 1));
+    assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
   }
 
 

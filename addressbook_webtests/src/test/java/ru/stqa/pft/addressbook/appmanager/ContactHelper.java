@@ -9,6 +9,7 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.datamodel.ContactCompanyDATA;
 import ru.stqa.pft.addressbook.datamodel.ContactConnectDATA;
 import ru.stqa.pft.addressbook.datamodel.ContactPersonalDATA;
+import ru.stqa.pft.addressbook.datamodel.Contacts;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -125,8 +126,8 @@ public class ContactHelper extends HelperBase {
     return contacts;
   }
 
-  public Set<ContactPersonalDATA> all() {
-    Set<ContactPersonalDATA> contacts = new HashSet<ContactPersonalDATA>();
+  public Contacts all() {
+    Contacts contacts = new Contacts();
     List<WebElement> rows = wb.findElements(By.name("entry"));
     for (WebElement row : rows) {
       List<WebElement> cells = row.findElements(By.tagName("td"));
