@@ -81,10 +81,16 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//input[@value='Delete']"));
   }
 
-  public void createContact(ContactPersonalDATA contact) {
+  public void create(ContactPersonalDATA contact) {
     initContactCreation();
     fillContactForm(contact, true);
     submitFilledContactForm();
+    returnToHomepage();
+  }
+
+  public void modify(ContactPersonalDATA contact) {
+    fillContactForm(contact, false);
+    submitContactModification();
     returnToHomepage();
   }
 
@@ -92,7 +98,7 @@ public class ContactHelper extends HelperBase {
     return wb.findElements(By.name("selected[]")).size();
   }
 
-  public List<ContactPersonalDATA> getContactList() {
+  public List<ContactPersonalDATA> list() {
     List<ContactPersonalDATA> contacts = new ArrayList<ContactPersonalDATA>();
     List<WebElement> rows = wb.findElements(By.name("entry"));
     for (WebElement row : rows) {
