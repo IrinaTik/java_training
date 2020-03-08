@@ -52,6 +52,10 @@ public class HelperBase {
     wb.findElements(By.name("selected[]")).get(index).click();
   }
 
+  public void selectById(int id) {
+    wb.findElement(By.cssSelector("input[value='" + id +"']")).click();
+  }
+
   protected boolean isElementPresent(By locator) {
     try {
       wb.findElement(locator);
