@@ -68,7 +68,7 @@ public class GroupHelper extends HelperBase{
     returnToGroupPage();
   }
 
-  public int getGroupCount() {
+  public int count() {
     return wb.findElements(By.name("selected[]")).size();
   }
 

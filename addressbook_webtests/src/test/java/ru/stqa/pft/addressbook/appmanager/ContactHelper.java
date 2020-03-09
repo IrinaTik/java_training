@@ -111,7 +111,7 @@ public class ContactHelper extends HelperBase {
     alertAccept();
   }
 
-  public int getContactCount() {
+  public int count() {
     return wb.findElements(By.name("selected[]")).size();
   }
 
