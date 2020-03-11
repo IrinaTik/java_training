@@ -138,9 +138,10 @@ public class ContactHelper extends HelperBase {
       String firstname = cells.get(2).getText();
       String lastname = cells.get(1).getText();
       int id = Integer.parseInt(row.findElement(By.tagName("input")).getAttribute("value"));
-      String[] phones = cells.get(5).getText().split("\n"); //по переносу строки
+      String allPhones = cells.get(5).getText();
+    //  String[] phones = cells.get(5).getText().split("\n"); //по переносу строки
       ContactPersonalDATA contact = new ContactPersonalDATA().withId(id).withFirstname(firstname).withLastname(lastname)
-              .withContactConnectDATA(new ContactConnectDATA().withHomePhone(phones[0]).withWorkPhone(phones[2]).withMobilePhone(phones[1]));
+              .withContactConnectDATA(new ContactConnectDATA().withAllPhones(allPhones));
       contactCache.add(contact);
     }
     return new Contacts(contactCache);
