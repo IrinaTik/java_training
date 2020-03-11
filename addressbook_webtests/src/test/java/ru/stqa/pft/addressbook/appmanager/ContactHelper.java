@@ -1,20 +1,16 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import ru.stqa.pft.addressbook.datamodel.ContactCompanyDATA;
 import ru.stqa.pft.addressbook.datamodel.ContactConnectDATA;
 import ru.stqa.pft.addressbook.datamodel.ContactPersonalDATA;
 import ru.stqa.pft.addressbook.datamodel.Contacts;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -142,7 +138,9 @@ public class ContactHelper extends HelperBase {
       String firstname = cells.get(2).getText();
       String lastname = cells.get(1).getText();
       int id = Integer.parseInt(row.findElement(By.tagName("input")).getAttribute("value"));
-      ContactPersonalDATA contact = new ContactPersonalDATA().withId(id).withFirstname(firstname).withLastname(lastname);
+      String[] phones = cells.get(5).getText().split("\n"); //по переносу строки
+      ContactPersonalDATA contact = new ContactPersonalDATA().withId(id).withFirstname(firstname).withLastname(lastname)
+              .withContactConnectDATA(new ContactConnectDATA().withHomePhone(phones[0]).withWorkPhone(phones[2]).withMobilePhone(phones[1]));
       contactCache.add(contact);
     }
     return new Contacts(contactCache);
@@ -161,6 +159,6 @@ public class ContactHelper extends HelperBase {
   }
 
   private void initContactModificationById(int id) {
-    wb.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']/td[8]/a", id))).click();
+    wb.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
   }
 }
