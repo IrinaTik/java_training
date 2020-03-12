@@ -139,9 +139,11 @@ public class ContactHelper extends HelperBase {
       String lastname = cells.get(1).getText();
       int id = Integer.parseInt(row.findElement(By.tagName("input")).getAttribute("value"));
       String allPhones = cells.get(5).getText();
+      String allEmails = cells.get(4).getText();
+      String address = cells.get(3).getText();
     //  String[] phones = cells.get(5).getText().split("\n"); //по переносу строки
       ContactPersonalDATA contact = new ContactPersonalDATA().withId(id).withFirstname(firstname).withLastname(lastname)
-              .withContactConnectDATA(new ContactConnectDATA().withAllPhones(allPhones));
+              .withContactConnectDATA(new ContactConnectDATA().withAllPhones(allPhones).withAllEmails(allEmails).withAddress(address));
       contactCache.add(contact);
     }
     return new Contacts(contactCache);
@@ -151,12 +153,22 @@ public class ContactHelper extends HelperBase {
     initContactModificationById(contact.getId());
     String firstname = wb.findElement(By.name("firstname")).getAttribute("value");
     String lastname = wb.findElement(By.name("lastname")).getAttribute("value");
+
     String homePhone = wb.findElement(By.name("home")).getAttribute("value");
     String mobilePhone = wb.findElement(By.name("mobile")).getAttribute("value");
     String workPhone = wb.findElement(By.name("work")).getAttribute("value");
+
+    String email_1 = wb.findElement(By.name("email")).getAttribute("value");
+    String email_2 = wb.findElement(By.name("email2")).getAttribute("value");
+    String email_3 = wb.findElement(By.name("email3")).getAttribute("value");
+
+    String address = wb.findElement(By.name("address")).getAttribute("value");
+
     wb.navigate().back();
     return new ContactPersonalDATA().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
-            .withContactConnectDATA(new ContactConnectDATA().withHomePhone(homePhone).withMobilePhone(mobilePhone).withWorkPhone(workPhone));
+            .withContactConnectDATA(new ContactConnectDATA().withHomePhone(homePhone).withMobilePhone(mobilePhone).withWorkPhone(workPhone)
+                    .withEmail_1(email_1).withEmail_2(email_2).withEmail_3(email_3)
+                    .withAddress(address));
   }
 
   private void initContactModificationById(int id) {

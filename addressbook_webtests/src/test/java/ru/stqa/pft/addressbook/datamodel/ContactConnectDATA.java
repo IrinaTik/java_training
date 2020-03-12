@@ -12,6 +12,7 @@ public class ContactConnectDATA {
   private String addressSecondary;
   private String phoneSecondary;
   private String allPhones;
+  private String allEmails;
 
  /* public ContactConnectDATA(String address, String homePhone, String mobilePhone, String workPhone, String email_1, String email_2, String email_3, String homepage, String addressSecondary, String phoneSecondary) {
     this.address = address;
@@ -70,6 +71,10 @@ public class ContactConnectDATA {
     return allPhones;
   }
 
+  public String getAllEmails() {
+    return allEmails;
+  }
+
   public ContactConnectDATA withAddress(String address) {
     this.address = address;
     return this;
@@ -125,6 +130,11 @@ public class ContactConnectDATA {
     return this;
   }
 
+  public ContactConnectDATA withAllEmails(String allEmails) {
+    this.allEmails = allEmails;
+    return this;
+  }
+
   @Override
   public String toString() {
     return "ContactConnectDATA{" +
@@ -140,5 +150,6 @@ public class ContactConnectDATA {
             ", phoneSecondary='" + phoneSecondary + '\'' +
             '}';
   }
+
 
 }
