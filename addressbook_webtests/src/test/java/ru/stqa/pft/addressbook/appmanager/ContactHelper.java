@@ -38,6 +38,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("nickname"), contactPersonalDATA.getNick());
     type(By.name("byear"), contactPersonalDATA.getBirthYear());
     type(By.name("notes"), contactPersonalDATA.getNote());
+    attach(By.name("photo"), contactPersonalDATA.getPhoto());
 
     if (! (contactPersonalDATA.getContactCompanyDATA() == null)) {
       type(By.name("title"), contactPersonalDATA.getContactCompanyDATA().getTitle());

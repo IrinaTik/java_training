@@ -1,5 +1,7 @@
 package ru.stqa.pft.addressbook.datamodel;
 
+import java.io.File;
+
 public class ContactPersonalDATA {
   private int id;
   private String firstname;
@@ -12,54 +14,7 @@ public class ContactPersonalDATA {
   private String birthMonth;
   private String birthYear;
   private String note;
-
- /* public ContactPersonalDATA(int id, String firstname, String middlename, String lastname, String nick, ContactCompanyDATA contactCompanyDATA, ContactConnectDATA contactConnectDATA, String birthDay, String birthMonth, String birthYear, String note) {
-    this.id = id;
-    this.firstname = firstname;
-    this.middlename = middlename;
-    this.lastname = lastname;
-    this.nick = nick;
-    this.contactCompanyDATA = contactCompanyDATA;
-    this.contactConnectDATA = contactConnectDATA;
-    this.birthDay = birthDay;
-    this.birthMonth = birthMonth;
-    this.birthYear = birthYear;
-    this.note = note;
-  }
-
-  public ContactPersonalDATA(String firstname, String middlename, String lastname, String nick, ContactCompanyDATA contactCompanyDATA, ContactConnectDATA contactConnectDATA, String birthDay, String birthMonth, String birthYear, String note) {
-    this.id = Integer.MAX_VALUE;
-    this.firstname = firstname;
-    this.middlename = middlename;
-    this.lastname = lastname;
-    this.nick = nick;
-    this.contactCompanyDATA = contactCompanyDATA;
-    this.contactConnectDATA = contactConnectDATA;
-    this.birthDay = birthDay;
-    this.birthMonth = birthMonth;
-    this.birthYear = birthYear;
-    this.note = note;
-  }
-
-  public ContactPersonalDATA(int id, String firstname, String lastname) {
-    this.id = id;
-    this.firstname = firstname;
-    this.middlename = null;
-    this.lastname = lastname;
-    this.nick = null;
-    this.contactCompanyDATA = new ContactCompanyDATA(null, null, null, null);
-   // this.contactCompanyDATA = null;
-    this.contactConnectDATA = new ContactConnectDATA(null, null, null, null, null, null, null, null, null, null);
-   // this.contactConnectDATA = null;
-    this.birthDay = null;
-    this.birthMonth = null;
-    this.birthYear = null;
-    this.note = null;
-  } */
-
-  public int getId() {
-    return id;
-  }
+  private File photo;
 
   public ContactPersonalDATA withId(int id) {
     this.id = id;
@@ -116,6 +71,15 @@ public class ContactPersonalDATA {
     return this;
   }
 
+  public ContactPersonalDATA withPhoto(File photo) {
+    this.photo = photo;
+    return this;
+  }
+
+  public int getId() {
+    return id;
+  }
+
   public String getFirstname() {
     return firstname;
   }
@@ -154,6 +118,10 @@ public class ContactPersonalDATA {
 
   public String getNote() {
     return note;
+  }
+
+  public File getPhoto() {
+    return photo;
   }
 
   @Override
