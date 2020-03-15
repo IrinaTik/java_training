@@ -65,7 +65,7 @@ public class ContactDataGenerator {
       contacts.add(new ContactPersonalDATA().withFirstname(String.format("first name %s", i)).withMiddlename(String.format("middle name %s", i))
               .withLastname(String.format("last name %s", i)).withNick(String.format("nick %s", i))
               .withContactCompanyDATA(new ContactCompanyDATA().withTitle(String.format("title %s", i)).withCompanyName(String.format("company %s", i))
-                      .withFaxNumber(String.format("fax %s", i)).withGroup(String.format("test %s", i)))
+                      .withFaxNumber(String.format("fax %s", i)).withGroup("test1"))
               .withContactConnectDATA(new ContactConnectDATA().withAddress(String.format("address %s", i)).withHomePhone(String.format("+7(987) %s", i))
                       .withMobilePhone(String.format("22-2%s", i)).withWorkPhone(String.format("12345678%s", i))
                       .withEmail_1(String.format("mail1_%s@mail.ru", i)).withEmail_2(String.format("mail2_%s@mail.ru", i)).withEmail_3(String.format("mail13_%s@mail.ru", i))

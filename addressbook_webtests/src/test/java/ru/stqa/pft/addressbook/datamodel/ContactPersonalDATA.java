@@ -150,7 +150,6 @@ public class ContactPersonalDATA {
             ", birthMonth='" + birthMonth + '\'' +
             ", birthYear='" + birthYear + '\'' +
             ", note='" + note + '\'' +
-            ", photo=" + photo.getAbsolutePath() +
             '}';
   }
 
