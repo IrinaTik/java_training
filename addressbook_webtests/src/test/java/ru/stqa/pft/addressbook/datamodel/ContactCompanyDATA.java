@@ -1,9 +1,15 @@
 package ru.stqa.pft.addressbook.datamodel;
 
+import com.google.gson.annotations.Expose;
+
 public class ContactCompanyDATA {
+  @Expose
   private String title;
+  @Expose
   private String companyName;
+  @Expose
   private String faxNumber;
+  @Expose
   private String group;
 
   /* public ContactCompanyDATA(String title, String companyName, String faxNumber, String group) {

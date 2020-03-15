@@ -1,15 +1,27 @@
 package ru.stqa.pft.addressbook.datamodel;
 
+import com.google.gson.annotations.Expose;
+
 public class ContactConnectDATA {
+  @Expose
   private String address;
+  @Expose
   private String homePhone;
+  @Expose
   private String mobilePhone;
+  @Expose
   private String workPhone;
+  @Expose
   private String email_1;
+  @Expose
   private String email_2;
+  @Expose
   private String email_3;
+  @Expose
   private String homepage;
+  @Expose
   private String addressSecondary;
+  @Expose
   private String phoneSecondary;
   private String allPhones;
   private String allEmails;

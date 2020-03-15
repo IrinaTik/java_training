@@ -1,18 +1,30 @@
 package ru.stqa.pft.addressbook.datamodel;
 
+import com.google.gson.annotations.Expose;
+
 import java.io.File;
 
 public class ContactPersonalDATA {
   private int id;
+  @Expose
   private String firstname;
+  @Expose
   private String middlename;
+  @Expose
   private String lastname;
+  @Expose
   private String nick;
+  @Expose
   private ContactCompanyDATA contactCompanyDATA;
+  @Expose
   private ContactConnectDATA contactConnectDATA;
+  @Expose
   private String birthDay;
+  @Expose
   private String birthMonth;
+  @Expose
   private String birthYear;
+  @Expose
   private String note;
   private File photo;
 
@@ -138,6 +150,7 @@ public class ContactPersonalDATA {
             ", birthMonth='" + birthMonth + '\'' +
             ", birthYear='" + birthYear + '\'' +
             ", note='" + note + '\'' +
+            ", photo=" + photo.getAbsolutePath() +
             '}';
   }
 
