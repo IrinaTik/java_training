@@ -24,7 +24,7 @@ public class ContactConnectDataTests extends TestBase {
   }
 
   private String mergePhones(ContactConnectDATA contactPhones) {
-    return Arrays.asList(contactPhones.getHomePhone(), contactPhones.getMobilePhone(), contactPhones.getWorkPhone())
+    return Arrays.asList(contactPhones.getHomePhone(), contactPhones.getMobilePhone(), contactPhones.getWorkPhone(), contactPhones.getPhoneSecondary())
             .stream().filter((s) -> ! s.equals(""))
             .map(ContactConnectDataTests::cleaned) //применить к элементам потока функцию
             .collect(Collectors.joining("\n"));

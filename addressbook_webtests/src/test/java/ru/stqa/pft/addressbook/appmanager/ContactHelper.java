@@ -158,6 +158,7 @@ public class ContactHelper extends HelperBase {
     String homePhone = wb.findElement(By.name("home")).getAttribute("value");
     String mobilePhone = wb.findElement(By.name("mobile")).getAttribute("value");
     String workPhone = wb.findElement(By.name("work")).getAttribute("value");
+    String secPhone = wb.findElement(By.name("phone2")).getAttribute("value");
 
     String email_1 = wb.findElement(By.name("email")).getAttribute("value");
     String email_2 = wb.findElement(By.name("email2")).getAttribute("value");
@@ -167,7 +168,7 @@ public class ContactHelper extends HelperBase {
 
     wb.navigate().back();
     return new ContactPersonalDATA().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
-            .withContactConnectDATA(new ContactConnectDATA().withHomePhone(homePhone).withMobilePhone(mobilePhone).withWorkPhone(workPhone)
+            .withContactConnectDATA(new ContactConnectDATA().withHomePhone(homePhone).withMobilePhone(mobilePhone).withWorkPhone(workPhone).withPhoneSecondary(secPhone)
                     .withEmail_1(email_1).withEmail_2(email_2).withEmail_3(email_3)
                     .withAddress(address));
   }
