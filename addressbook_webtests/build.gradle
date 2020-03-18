@@ -15,6 +15,14 @@ dependencies {
     compile 'org.immutables:gson:2.8.3'
 }
 
-test {
-    useTestNG()
+task testGroups(type: Test) {
+    useTestNG() {
+        suites 'src/test/resources/testng-groups.xml'
+    }
+}
+
+task testContacts(type: Test) {
+    useTestNG() {
+        suites 'src/test/resources/testng-contacts.xml'
+    }
 }
