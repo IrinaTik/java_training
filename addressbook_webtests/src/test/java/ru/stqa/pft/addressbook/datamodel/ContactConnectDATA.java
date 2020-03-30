@@ -2,28 +2,46 @@ package ru.stqa.pft.addressbook.datamodel;
 
 import com.google.gson.annotations.Expose;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+
 public class ContactConnectDATA {
   @Expose
   private String address;
+
   @Expose
   private String homePhone;
+
   @Expose
   private String mobilePhone;
+
   @Expose
   private String workPhone;
+
   @Expose
   private String email_1;
+
   @Expose
   private String email_2;
+
   @Expose
   private String email_3;
+
   @Expose
   private String homepage;
+
   @Expose
   private String addressSecondary;
+
   @Expose
   private String phoneSecondary;
+
+  @Transient
   private String allPhones;
+  @Transient
   private String allEmails;
 
  /* public ContactConnectDATA(String address, String homePhone, String mobilePhone, String workPhone, String email_1, String email_2, String email_3, String homepage, String addressSecondary, String phoneSecondary) {
