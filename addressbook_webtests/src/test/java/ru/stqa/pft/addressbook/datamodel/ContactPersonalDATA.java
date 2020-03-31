@@ -17,7 +17,7 @@ public class ContactPersonalDATA {
   private String firstname;
 
   @Expose
-  @Transient
+  @Column(name = "middlename")
   private String middlename;
 
   @Expose
@@ -25,7 +25,7 @@ public class ContactPersonalDATA {
   private String lastname;
 
   @Expose
-  @Transient
+  @Column(name = "nickname")
   private String nick;
 
   @Expose
@@ -37,19 +37,20 @@ public class ContactPersonalDATA {
   private ContactConnectDATA contactConnectDATA;
 
   @Expose
-  @Transient
+  @Column(name = "bday", columnDefinition = "TINYINT")
   private String birthDay;
 
   @Expose
-  @Transient
+  @Column(name = "bmonth")
   private String birthMonth;
 
   @Expose
-  @Transient
+  @Column(name = "byear")
   private String birthYear;
 
   @Expose
-  @Transient
+  @Column(name = "notes")
+  @Type(type = "text")
   private String note;
 
   @Column(name = "photo")
@@ -190,7 +191,13 @@ public class ContactPersonalDATA {
 
     if (id != that.id) return false;
     if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-    return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
+    if (middlename != null ? !middlename.equals(that.middlename) : that.middlename != null) return false;
+    if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
+    if (nick != null ? !nick.equals(that.nick) : that.nick != null) return false;
+    if (birthDay != null ? !birthDay.equals(that.birthDay) : that.birthDay != null) return false;
+    if (birthMonth != null ? !birthMonth.equals(that.birthMonth) : that.birthMonth != null) return false;
+    if (birthYear != null ? !birthYear.equals(that.birthYear) : that.birthYear != null) return false;
+    return note != null ? note.equals(that.note) : that.note == null;
 
   }
 
@@ -198,10 +205,15 @@ public class ContactPersonalDATA {
   public int hashCode() {
     int result = id;
     result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
+    result = 31 * result + (middlename != null ? middlename.hashCode() : 0);
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+    result = 31 * result + (nick != null ? nick.hashCode() : 0);
+    result = 31 * result + (birthDay != null ? birthDay.hashCode() : 0);
+    result = 31 * result + (birthMonth != null ? birthMonth.hashCode() : 0);
+    result = 31 * result + (birthYear != null ? birthYear.hashCode() : 0);
+    result = 31 * result + (note != null ? note.hashCode() : 0);
     return result;
   }
-
 }
 
 

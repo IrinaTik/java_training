@@ -2,11 +2,7 @@ package ru.stqa.pft.addressbook.datamodel;
 
 import com.google.gson.annotations.Expose;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
+import javax.persistence.*;
 
 public class ContactConnectDATA {
   @Expose
