@@ -29,14 +29,6 @@ public class ContactPersonalDATA {
   private String nick;
 
   @Expose
-  @Transient
-  private ContactCompanyDATA contactCompanyDATA;
-
-  @Expose
-  @Transient
-  private ContactConnectDATA contactConnectDATA;
-
-  @Expose
   @Column(name = "bday", columnDefinition = "TINYINT")
   private String birthDay;
 
@@ -49,6 +41,67 @@ public class ContactPersonalDATA {
   private String birthYear;
 
   @Expose
+  @Transient
+  private String title;
+
+  @Expose
+  @Transient
+  private String companyName;
+
+  @Expose
+  @Transient
+  private String faxNumber;
+
+  @Expose
+  @Transient
+  private String group;
+
+  @Expose
+  @Transient
+  private String address;
+
+  @Expose
+  @Transient
+  private String homePhone;
+
+  @Expose
+  @Transient
+  private String mobilePhone;
+
+  @Expose
+  @Transient
+  private String workPhone;
+
+  @Expose
+  @Transient
+  private String email_1;
+
+  @Expose
+  @Transient
+  private String email_2;
+
+  @Expose
+  @Transient
+  private String email_3;
+
+  @Expose
+  @Transient
+  private String homepage;
+
+  @Expose
+  @Transient
+  private String addressSecondary;
+
+  @Expose
+  @Transient
+  private String phoneSecondary;
+
+  @Transient
+  private String allPhones;
+  @Transient
+  private String allEmails;
+
+  @Expose
   @Column(name = "notes")
   @Type(type = "text")
   private String note;
@@ -56,6 +109,27 @@ public class ContactPersonalDATA {
   @Column(name = "photo")
   @Type(type = "text")
   private String photo;
+
+  public ContactPersonalDATA withTitle(String title) {
+    this.title = title;
+    return this;
+  }
+
+  public ContactPersonalDATA withCompanyName(String companyName) {
+    this.companyName = companyName;
+    return this;
+  }
+
+  public ContactPersonalDATA withFaxNumber(String faxNumber) {
+    this.faxNumber = faxNumber;
+    return this;
+  }
+
+  public ContactPersonalDATA withGroup(String group) {
+    this.group = group;
+    return this;
+  }
+
 
   public ContactPersonalDATA withId(int id) {
     this.id = id;
@@ -79,16 +153,6 @@ public class ContactPersonalDATA {
 
   public ContactPersonalDATA withNick(String nick) {
     this.nick = nick;
-    return this;
-  }
-
-  public ContactPersonalDATA withContactCompanyDATA(ContactCompanyDATA contactCompanyDATA) {
-    this.contactCompanyDATA = contactCompanyDATA;
-    return this;
-  }
-
-  public ContactPersonalDATA withContactConnectDATA(ContactConnectDATA contactConnectDATA) {
-    this.contactConnectDATA = contactConnectDATA;
     return this;
   }
 
@@ -117,6 +181,66 @@ public class ContactPersonalDATA {
     return this;
   }
 
+  public ContactPersonalDATA withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+
+  public ContactPersonalDATA withHomePhone(String homePhone) {
+    this.homePhone = homePhone;
+    return this;
+  }
+
+  public ContactPersonalDATA withMobilePhone(String mobilePhone) {
+    this.mobilePhone = mobilePhone;
+    return this;
+  }
+
+  public ContactPersonalDATA withWorkPhone(String workPhone) {
+    this.workPhone = workPhone;
+    return this;
+  }
+
+  public ContactPersonalDATA withEmail_1(String email_1) {
+    this.email_1 = email_1;
+    return this;
+  }
+
+  public ContactPersonalDATA withEmail_2(String email_2) {
+    this.email_2 = email_2;
+    return this;
+  }
+
+  public ContactPersonalDATA withEmail_3(String email_3) {
+    this.email_3 = email_3;
+    return this;
+  }
+
+  public ContactPersonalDATA withHomepage(String homepage) {
+    this.homepage = homepage;
+    return this;
+  }
+
+  public ContactPersonalDATA withAddressSecondary(String addressSecondary) {
+    this.addressSecondary = addressSecondary;
+    return this;
+  }
+
+  public ContactPersonalDATA withPhoneSecondary(String phoneSecondary) {
+    this.phoneSecondary = phoneSecondary;
+    return this;
+  }
+
+  public ContactPersonalDATA withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
+
+  public ContactPersonalDATA withAllEmails(String allEmails) {
+    this.allEmails = allEmails;
+    return this;
+  }
+
   public int getId() {
     return id;
   }
@@ -135,14 +259,6 @@ public class ContactPersonalDATA {
 
   public String getNick() {
     return nick;
-  }
-
-  public ContactCompanyDATA getContactCompanyDATA() {
-    return contactCompanyDATA;
-  }
-
-  public ContactConnectDATA getContactConnectDATA() {
-    return contactConnectDATA;
   }
 
   public String getBirthDay() {
@@ -165,6 +281,70 @@ public class ContactPersonalDATA {
     return new File(photo);
   }
 
+  public String getAddress() {
+    return address;
+  }
+
+  public String getHomePhone() {
+    return homePhone;
+  }
+
+  public String getMobilePhone() {
+    return mobilePhone;
+  }
+
+  public String getWorkPhone() {
+    return workPhone;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public String getCompanyName() {
+    return companyName;
+  }
+
+  public String getFaxNumber() {
+    return faxNumber;
+  }
+
+  public String getGroup() {
+    return group;
+  }
+
+  public String getEmail_1() {
+    return email_1;
+  }
+
+  public String getEmail_2() {
+    return email_2;
+  }
+
+  public String getEmail_3() {
+    return email_3;
+  }
+
+  public String getHomepage() {
+    return homepage;
+  }
+
+  public String getAddressSecondary() {
+    return addressSecondary;
+  }
+
+  public String getPhoneSecondary() {
+    return phoneSecondary;
+  }
+
+  public String getAllPhones() {
+    return allPhones;
+  }
+
+  public String getAllEmails() {
+    return allEmails;
+  }
+
   @Override
   public String toString() {
     return "ContactPersonalDATA{" +
@@ -173,12 +353,27 @@ public class ContactPersonalDATA {
             ", middlename='" + middlename + '\'' +
             ", lastname='" + lastname + '\'' +
             ", nick='" + nick + '\'' +
-            ", contactCompanyDATA=" + contactCompanyDATA +
-            ", contactConnectDATA=" + contactConnectDATA +
             ", birthDay='" + birthDay + '\'' +
             ", birthMonth='" + birthMonth + '\'' +
             ", birthYear='" + birthYear + '\'' +
+            ", title='" + title + '\'' +
+            ", companyName='" + companyName + '\'' +
+            ", faxNumber='" + faxNumber + '\'' +
+            ", group='" + group + '\'' +
+            ", address='" + address + '\'' +
+            ", homePhone='" + homePhone + '\'' +
+            ", mobilePhone='" + mobilePhone + '\'' +
+            ", workPhone='" + workPhone + '\'' +
+            ", email_1='" + email_1 + '\'' +
+            ", email_2='" + email_2 + '\'' +
+            ", email_3='" + email_3 + '\'' +
+            ", homepage='" + homepage + '\'' +
+            ", addressSecondary='" + addressSecondary + '\'' +
+            ", phoneSecondary='" + phoneSecondary + '\'' +
+            ", allPhones='" + allPhones + '\'' +
+            ", allEmails='" + allEmails + '\'' +
             ", note='" + note + '\'' +
+            ", photo='" + photo + '\'' +
             '}';
   }
 

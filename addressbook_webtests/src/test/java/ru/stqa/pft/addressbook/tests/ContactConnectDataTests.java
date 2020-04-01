@@ -1,7 +1,6 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.datamodel.ContactConnectDATA;
 import ru.stqa.pft.addressbook.datamodel.ContactPersonalDATA;
 
 import java.util.Arrays;
@@ -18,12 +17,12 @@ public class ContactConnectDataTests extends TestBase {
     ContactPersonalDATA contact = app.contact().all().iterator().next();
     ContactPersonalDATA contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
-    assertThat(contact.getContactConnectDATA().getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm.getContactConnectDATA())));
-    assertThat(contact.getContactConnectDATA().getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm.getContactConnectDATA())));
-    assertThat(contact.getContactConnectDATA().getAddress(), equalTo(contactInfoFromEditForm.getContactConnectDATA().getAddress()));
+    assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
+    assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
+    assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
   }
 
-  private String mergePhones(ContactConnectDATA contactPhones) {
+  private String mergePhones(ContactPersonalDATA contactPhones) {
     return Arrays.asList(contactPhones.getHomePhone(), contactPhones.getMobilePhone(), contactPhones.getWorkPhone(), contactPhones.getPhoneSecondary())
             .stream().filter((s) -> ! s.equals(""))
             .map(ContactConnectDataTests::cleaned) //применить к элементам потока функцию
@@ -31,7 +30,7 @@ public class ContactConnectDataTests extends TestBase {
     //отбрасывает пустые строки, чистит от лишних символов, вставляет переход строки
   }
 
-  private String mergeEmails(ContactConnectDATA contactEmails) {
+  private String mergeEmails(ContactPersonalDATA contactEmails) {
     return Arrays.asList(contactEmails.getEmail_1(), contactEmails.getEmail_2(), contactEmails.getEmail_3())
             .stream().filter((s) -> ! s.equals(""))
             .collect(Collectors.joining("\n"));

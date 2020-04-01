@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import ru.stqa.pft.addressbook.datamodel.ContactConnectDATA;
 import ru.stqa.pft.addressbook.datamodel.ContactPersonalDATA;
 import ru.stqa.pft.addressbook.datamodel.Contacts;
 
@@ -40,23 +39,25 @@ public class ContactHelper extends HelperBase {
     type(By.name("notes"), contactPersonalDATA.getNote());
   //  attach(By.name("photo"), contactPersonalDATA.getPhoto());
 
-    if (! (contactPersonalDATA.getContactCompanyDATA() == null)) {
-      type(By.name("title"), contactPersonalDATA.getContactCompanyDATA().getTitle());
-      type(By.name("company"), contactPersonalDATA.getContactCompanyDATA().getCompanyName());
-      type(By.name("fax"), contactPersonalDATA.getContactCompanyDATA().getFaxNumber());
-    }
+    type(By.name("title"), contactPersonalDATA.getTitle());
+    type(By.name("company"), contactPersonalDATA.getCompanyName());
+    type(By.name("fax"), contactPersonalDATA.getFaxNumber());
 
-    if (! (contactPersonalDATA.getContactConnectDATA() == null)) {
-      type(By.name("address"), contactPersonalDATA.getContactConnectDATA().getAddress());
-      type(By.name("home"), contactPersonalDATA.getContactConnectDATA().getHomePhone());
-      type(By.name("mobile"), contactPersonalDATA.getContactConnectDATA().getMobilePhone());
-      type(By.name("work"), contactPersonalDATA.getContactConnectDATA().getWorkPhone());
-      type(By.name("email"), contactPersonalDATA.getContactConnectDATA().getEmail_1());
-      type(By.name("email2"), contactPersonalDATA.getContactConnectDATA().getEmail_2());
-      type(By.name("email3"), contactPersonalDATA.getContactConnectDATA().getEmail_3());
-      type(By.name("homepage"), contactPersonalDATA.getContactConnectDATA().getHomepage());
-      type(By.name("address2"), contactPersonalDATA.getContactConnectDATA().getAddressSecondary());
-      type(By.name("phone2"), contactPersonalDATA.getContactConnectDATA().getPhoneSecondary());
+    type(By.name("address"), contactPersonalDATA.getAddress());
+    type(By.name("home"), contactPersonalDATA.getHomePhone());
+    type(By.name("mobile"), contactPersonalDATA.getMobilePhone());
+    type(By.name("work"), contactPersonalDATA.getWorkPhone());
+    type(By.name("email"), contactPersonalDATA.getEmail_1());
+    type(By.name("email2"), contactPersonalDATA.getEmail_2());
+    type(By.name("email3"), contactPersonalDATA.getEmail_3());
+    type(By.name("homepage"), contactPersonalDATA.getHomepage());
+    type(By.name("address2"), contactPersonalDATA.getAddressSecondary());
+    type(By.name("phone2"), contactPersonalDATA.getPhoneSecondary());
+
+    if (creation) {
+      new Select(wb.findElement(By.name("new_group"))).selectByVisibleText(contactPersonalDATA.getGroup());
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
 
     if (contactPersonalDATA.getBirthDay() != null) {
@@ -64,12 +65,6 @@ public class ContactHelper extends HelperBase {
     }
     if (contactPersonalDATA.getBirthMonth() != null) {
       chooseFromList(By.name("bmonth"), contactPersonalDATA.getBirthMonth());
-    }
-
-    if (creation && contactPersonalDATA.getContactCompanyDATA() != null) {
-      new Select(wb.findElement(By.name("new_group"))).selectByVisibleText(contactPersonalDATA.getContactCompanyDATA().getGroup());
-    } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
 
   }
@@ -144,7 +139,7 @@ public class ContactHelper extends HelperBase {
       String address = cells.get(3).getText();
     //  String[] phones = cells.get(5).getText().split("\n"); //по переносу строки
       ContactPersonalDATA contact = new ContactPersonalDATA().withId(id).withFirstname(firstname).withLastname(lastname)
-              .withContactConnectDATA(new ContactConnectDATA().withAllPhones(allPhones).withAllEmails(allEmails).withAddress(address));
+                                      .withAllPhones(allPhones).withAllEmails(allEmails).withAddress(address);
       contactCache.add(contact);
     }
     return new Contacts(contactCache);
@@ -168,9 +163,9 @@ public class ContactHelper extends HelperBase {
 
     wb.navigate().back();
     return new ContactPersonalDATA().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
-            .withContactConnectDATA(new ContactConnectDATA().withHomePhone(homePhone).withMobilePhone(mobilePhone).withWorkPhone(workPhone).withPhoneSecondary(secPhone)
+                    .withHomePhone(homePhone).withMobilePhone(mobilePhone).withWorkPhone(workPhone).withPhoneSecondary(secPhone)
                     .withEmail_1(email_1).withEmail_2(email_2).withEmail_3(email_3)
-                    .withAddress(address));
+                    .withAddress(address);
   }
 
   private void initContactModificationById(int id) {
