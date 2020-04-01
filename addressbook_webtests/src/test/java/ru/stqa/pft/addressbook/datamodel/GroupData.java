@@ -32,7 +32,7 @@ public class GroupData {
   @Type(type = "text")
   private String footer;
 
-  @ManyToMany(mappedBy = "groups") //ссылка на поле в ContactPersonalDATA
+  @ManyToMany(fetch = FetchType.EAGER, mappedBy = "groups") //ссылка на поле в ContactPersonalDATA
   private Set<ContactPersonalDATA> contacts = new HashSet<ContactPersonalDATA>();
 
   public String getName() {

@@ -41,4 +41,18 @@ public class DbHelper {
     session.close();
     return new Contacts(result);
   }
+
+  public ContactPersonalDATA contactRefresh(ContactPersonalDATA contact) {
+    Session session = sessionFactory.openSession();
+    session.refresh(contact);
+    session.close();
+    return contact;
+  }
+
+  public GroupData groupRefresh(GroupData group) {
+    Session session = sessionFactory.openSession();
+    session.refresh(group);
+    session.close();
+    return group;
+  }
 }
