@@ -16,18 +16,20 @@ public class AddContactToGroupTests extends TestBase{
   @BeforeMethod
   public void ensurePreconditions() {
 
+    Contacts contacts = app.db().contacts();
+
     if (app.db().groups().size() == 0) {
       app.goTo().groupPage();
       app.group().create(new GroupData().withName("test_group").withHeader("header_testgroup").withFooter("footer_testgroup"));
       app.goTo().homepage();
     }
 
-    if (app.db().contacts().size() == 0) {
+    //два в одном - если нет контактов или все контакты уже в группах
+    if ((contacts.size() == 0) || (app.contact().findFreeContact(contacts) == null)) {
       app.contact().create(new ContactPersonalDATA().withFirstname("test_contact").withLastname("test_contactAddToGroup"));
       app.goTo().homepage();
     }
 
-    //здесь еще должна быть проверка на наличие контакта без группы
   }
 
   @Test
@@ -35,7 +37,7 @@ public class AddContactToGroupTests extends TestBase{
     Groups groups = app.db().groups();
     Contacts contacts = app.db().contacts();
 
-    ContactPersonalDATA contactToAdd = contacts.iterator().next();
+    ContactPersonalDATA contactToAdd = app.contact().findFreeContact(contacts);
     GroupData groupToAdd = groups.iterator().next();
     app.contact().addContactToGroup(contactToAdd, groupToAdd);
 

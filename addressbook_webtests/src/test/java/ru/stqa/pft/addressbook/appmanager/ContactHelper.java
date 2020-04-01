@@ -8,6 +8,7 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.datamodel.ContactPersonalDATA;
 import ru.stqa.pft.addressbook.datamodel.Contacts;
 import ru.stqa.pft.addressbook.datamodel.GroupData;
+import ru.stqa.pft.addressbook.datamodel.Groups;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -181,5 +182,15 @@ public class ContactHelper extends HelperBase {
     selectById(contact.getId());
     new Select(wb.findElement(By.name("to_group"))).selectByVisibleText(group.getName());
     click(By.name("add"));
+  }
+
+  public ContactPersonalDATA findFreeContact(Contacts contacts) {
+    for (ContactPersonalDATA contact : contacts) {
+      Groups groups = contact.getGroups();
+      if (groups.size() == 0) {
+        return contact;
+      }
+    }
+    return null;
   }
 }
