@@ -55,7 +55,11 @@ public class ContactHelper extends HelperBase {
     type(By.name("phone2"), contactPersonalDATA.getPhoneSecondary());
 
     if (creation) {
-      new Select(wb.findElement(By.name("new_group"))).selectByVisibleText(contactPersonalDATA.getGroup());
+      if (contactPersonalDATA.getGroups().size() > 0) {
+        Assert.assertTrue(contactPersonalDATA.getGroups().size() == 1);
+        new Select(wb.findElement(By.name("new_group"))).selectByVisibleText(contactPersonalDATA.getGroups().iterator().next().getName());
+      }
+
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }

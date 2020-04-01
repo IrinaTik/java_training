@@ -5,6 +5,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "addressbook")
 public class ContactPersonalDATA {
@@ -51,10 +54,6 @@ public class ContactPersonalDATA {
   @Expose
   @Transient
   private String faxNumber;
-
-  @Expose
-  @Transient
-  private String group;
 
   @Expose
   @Transient
@@ -110,6 +109,12 @@ public class ContactPersonalDATA {
   @Type(type = "text")
   private String photo;
 
+  @ManyToMany(fetch = FetchType.EAGER) //для извлечения бОльшего объема инфы. Вместо LAZY по умолчанию
+  @JoinTable(name = "address_in_groups",
+          joinColumns = @JoinColumn(name = "id"),
+          inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
+
   public ContactPersonalDATA withTitle(String title) {
     this.title = title;
     return this;
@@ -124,12 +129,6 @@ public class ContactPersonalDATA {
     this.faxNumber = faxNumber;
     return this;
   }
-
-  public ContactPersonalDATA withGroup(String group) {
-    this.group = group;
-    return this;
-  }
-
 
   public ContactPersonalDATA withId(int id) {
     this.id = id;
@@ -241,6 +240,15 @@ public class ContactPersonalDATA {
     return this;
   }
 
+  public Groups getGroups() {
+    return new Groups(groups);
+  }
+
+  public ContactPersonalDATA inGroup(GroupData group) {
+    groups.add(group);
+    return this;
+  }
+
   public int getId() {
     return id;
   }
@@ -309,10 +317,6 @@ public class ContactPersonalDATA {
     return faxNumber;
   }
 
-  public String getGroup() {
-    return group;
-  }
-
   public String getEmail_1() {
     return email_1;
   }
@@ -359,7 +363,6 @@ public class ContactPersonalDATA {
             ", title='" + title + '\'' +
             ", companyName='" + companyName + '\'' +
             ", faxNumber='" + faxNumber + '\'' +
-            ", group='" + group + '\'' +
             ", address='" + address + '\'' +
             ", homePhone='" + homePhone + '\'' +
             ", mobilePhone='" + mobilePhone + '\'' +
@@ -409,6 +412,7 @@ public class ContactPersonalDATA {
     result = 31 * result + (note != null ? note.hashCode() : 0);
     return result;
   }
+
 }
 
 
