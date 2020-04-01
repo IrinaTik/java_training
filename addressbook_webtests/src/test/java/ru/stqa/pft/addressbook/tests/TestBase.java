@@ -9,6 +9,8 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
+import ru.stqa.pft.addressbook.datamodel.ContactPersonalDATA;
+import ru.stqa.pft.addressbook.datamodel.Contacts;
 import ru.stqa.pft.addressbook.datamodel.GroupData;
 import ru.stqa.pft.addressbook.datamodel.Groups;
 
@@ -49,6 +51,7 @@ public class TestBase {
 
   public void verifyGroupListInUI() {
     if (Boolean.getBoolean("verifyUI")) { //проверка системного параметра запуска
+      System.out.println("Verifying UI is enabled");
       Groups dbGroups = app.db().groups();
       Groups uiGroups = app.group().all();
       assertThat(uiGroups, equalTo(dbGroups.stream()
@@ -56,4 +59,16 @@ public class TestBase {
               .collect(Collectors.toSet())));
     }
   }
-}
+
+  public void verifyContactListInUI() {
+    if (Boolean.getBoolean("verifyUI")) { //проверка системного параметра запуска
+      System.out.println("Verifying UI is enabled");
+      Contacts dbContacts = app.db().contacts();
+      Contacts uiContacts = app.contact().all();
+      assertThat(uiContacts, equalTo(dbContacts.stream()
+              .map((c) -> new ContactPersonalDATA().withId(c.getId()).withLastname(c.getLastname()).withFirstname(c.getFirstname()))
+              .collect(Collectors.toSet())));
+    }
+  }
+
+  }
