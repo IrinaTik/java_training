@@ -184,10 +184,26 @@ public class ContactHelper extends HelperBase {
     click(By.name("add"));
   }
 
+  public void deleteContactFromGroup(ContactPersonalDATA contact, GroupData group) {
+    new Select(wb.findElement(By.name("group"))).selectByVisibleText(group.getName());
+    selectById(contact.getId());
+    click(By.name("remove"));
+  }
+
   public ContactPersonalDATA findFreeContact(Contacts contacts) {
     for (ContactPersonalDATA contact : contacts) {
       Groups groups = contact.getGroups();
       if (groups.size() == 0) {
+        return contact;
+      }
+    }
+    return null;
+  }
+
+  public ContactPersonalDATA findTakenContact(Contacts contacts) {
+    for (ContactPersonalDATA contact : contacts) {
+      Groups groups = contact.getGroups();
+      if (groups.size() != 0) {
         return contact;
       }
     }

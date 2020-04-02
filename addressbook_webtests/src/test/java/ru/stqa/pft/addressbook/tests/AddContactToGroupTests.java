@@ -39,6 +39,8 @@ public class AddContactToGroupTests extends TestBase{
 
     ContactPersonalDATA contactToAdd = app.contact().findFreeContact(contacts);
     GroupData groupToAdd = groups.iterator().next();
+
+    app.goTo().homepage();
     app.contact().addContactToGroup(contactToAdd, groupToAdd);
 
     ContactPersonalDATA contactAfterAdding = app.db().contactRefresh(contactToAdd);
