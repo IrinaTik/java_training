@@ -36,11 +36,11 @@ public class DeleteContactFromGroupTests extends TestBase {
 
   @Test
   public void testAddContactToGroup() {
-    Groups groups = app.db().groups();
+    //Groups groups = app.db().groups();
     Contacts contacts = app.db().contacts();
 
     ContactPersonalDATA contactToDelete = app.contact().findTakenContact(contacts);
-    GroupData groupToDelete = groups.iterator().next();
+    GroupData groupToDelete = contactToDelete.getGroups().iterator().next();
 
     app.goTo().homepage();
     app.contact().deleteContactFromGroup(contactToDelete, groupToDelete);
