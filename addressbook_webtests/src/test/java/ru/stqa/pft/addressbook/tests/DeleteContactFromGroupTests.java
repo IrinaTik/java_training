@@ -8,6 +8,7 @@ import ru.stqa.pft.addressbook.datamodel.GroupData;
 import ru.stqa.pft.addressbook.datamodel.Groups;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -47,8 +48,8 @@ public class DeleteContactFromGroupTests extends TestBase {
     ContactPersonalDATA contactAfterDeleting = app.db().contactRefresh(contactToDelete);
     GroupData groupAfterDeleting = app.db().groupRefresh(groupToDelete);
 
-    assertThat(contactAfterDeleting.getGroups(), not(groupToDelete));
-    assertThat(groupAfterDeleting.getContacts(), not(contactToDelete));
+    assertThat(contactAfterDeleting.getGroups(), not(hasItem(groupToDelete)));
+    assertThat(groupAfterDeleting.getContacts(), not(hasItem(contactToDelete)));
     assertThat(contactToDelete, equalTo(contactAfterDeleting.inGroup(groupAfterDeleting)));
   }
 }
