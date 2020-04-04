@@ -3,6 +3,8 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import ru.stqa.pft.addressbook.datamodel.ContactPersonalDATA;
+import ru.stqa.pft.addressbook.datamodel.Contacts;
 import ru.stqa.pft.addressbook.datamodel.GroupData;
 import ru.stqa.pft.addressbook.datamodel.Groups;
 
@@ -86,6 +88,20 @@ public class GroupHelper extends HelperBase{
       groupCache.add(new GroupData().withId(id).withName(name));
     }
     return new Groups(groupCache);
+  }
+
+  public GroupData findGroupWithoutCurrentContact (Groups groups, ContactPersonalDATA currentContact) {
+    for (GroupData group : groups) {
+      Contacts groupContacts = group.getContacts();
+      if (groupContacts.size() == 0) {
+        return group;
+      } else {
+        if (!(groupContacts.contains(currentContact))) {
+          return group;
+       }
+      }
+    }
+    return null;
   }
 
 }

@@ -190,11 +190,17 @@ public class ContactHelper extends HelperBase {
     click(By.name("remove"));
   }
 
-  public ContactPersonalDATA findFreeContact(Contacts contacts) {
+  public ContactPersonalDATA findFreeContact(Contacts contacts, Groups groups) {
     for (ContactPersonalDATA contact : contacts) {
-      Groups groups = contact.getGroups();
-      if (groups.size() == 0) {
+      Groups contactGroups = contact.getGroups();
+      if (contactGroups.size() == 0) {
         return contact;
+      } else {
+        for (GroupData group : groups) {
+          if (!(contactGroups.contains(group))) {
+            return contact;
+          }
+        }
       }
     }
     return null;

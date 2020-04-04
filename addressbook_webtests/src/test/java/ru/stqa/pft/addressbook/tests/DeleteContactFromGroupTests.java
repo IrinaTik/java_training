@@ -26,9 +26,15 @@ public class DeleteContactFromGroupTests extends TestBase {
       app.goTo().homepage();
     }
 
-    //два в одном - если нет контактов или все контакты без групп
-    if ((contacts.size() == 0) || (app.contact().findTakenContact(contacts) == null)) {
+    if (contacts.size() == 0) {
       app.contact().create(new ContactPersonalDATA().withFirstname("test_contact").withLastname("test_contactDeleteFromGroup").inGroup(groups.iterator().next()));
+      app.goTo().homepage();
+    }
+
+    if (app.contact().findTakenContact(contacts) == null) {
+      ContactPersonalDATA preContact = contacts.iterator().next();
+      GroupData preGroup = groups.iterator().next();
+      app.contact().addContactToGroup(preContact, preGroup);
       app.goTo().homepage();
     }
 
@@ -50,6 +56,5 @@ public class DeleteContactFromGroupTests extends TestBase {
 
     assertThat(contactAfterDeleting.getGroups(), not(hasItem(groupToDelete)));
     assertThat(groupAfterDeleting.getContacts(), not(hasItem(contactToDelete)));
-    assertThat(contactToDelete, equalTo(contactAfterDeleting.inGroup(groupAfterDeleting)));
   }
 }
