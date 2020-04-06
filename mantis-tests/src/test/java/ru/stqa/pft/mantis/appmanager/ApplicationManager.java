@@ -16,9 +16,10 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
 
   private final Properties properties;
-  WebDriver wb;
+  private WebDriver wb;
 
   private String browser;
+  private RegistrationHelper registrationHelper;
 
 
   public ApplicationManager(String browser)  {
@@ -29,24 +30,12 @@ public class ApplicationManager {
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
-
-    if (Objects.equals(browser, BrowserType.FIREFOX)) {
-      System.setProperty("webdriver.gecko.driver", "D:\\JAVAtools\\geckodriver.exe");
-      wb = new FirefoxDriver();
-    } else if (Objects.equals(browser, BrowserType.CHROME)) {
-      System.setProperty("webdriver.chrome.driver", "D:\\JAVAtools\\chromedriver.exe");
-      wb = new ChromeDriver();
-    } else if (Objects.equals(browser, BrowserType.IE)) {
-      System.setProperty("webdriver.ie.driver", "D:\\JAVAtools\\IEDriverServer.exe");
-      wb = new InternetExplorerDriver();
-    }
-
-    wb.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-    wb.get(properties.getProperty("web.baseURL"));
    }
 
   public void stop() {
-    wb.quit();
+    if (wb != null) {
+      wb.quit();
+    }
   }
 
   public HttpSession newSession() {
@@ -55,5 +44,30 @@ public class ApplicationManager {
 
   public String getProperty(String key) {
     return properties.getProperty(key);
+  }
+
+  public RegistrationHelper registration() {
+    if (registrationHelper == null) {
+      registrationHelper = new RegistrationHelper(this);
+    }
+    return registrationHelper;
+  }
+
+  public WebDriver getDriver() {
+    if (wb == null) {
+      if (Objects.equals(browser, BrowserType.FIREFOX)) {
+        System.setProperty("webdriver.gecko.driver", "D:\\JAVAtools\\geckodriver.exe");
+        wb = new FirefoxDriver();
+      } else if (Objects.equals(browser, BrowserType.CHROME)) {
+        System.setProperty("webdriver.chrome.driver", "D:\\JAVAtools\\chromedriver.exe");
+        wb = new ChromeDriver();
+      } else if (Objects.equals(browser, BrowserType.IE)) {
+        System.setProperty("webdriver.ie.driver", "D:\\JAVAtools\\IEDriverServer.exe");
+        wb = new InternetExplorerDriver();
+      }
+      wb.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+      wb.get(properties.getProperty("web.baseURL"));
+    }
+    return wb;
   }
 }
