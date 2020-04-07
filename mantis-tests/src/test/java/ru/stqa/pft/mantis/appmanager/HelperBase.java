@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import java.io.File;
 
 public class HelperBase {
-  protected ApplicationManager app;
+  public ApplicationManager app;
   protected WebDriver wb;
 
   public HelperBase(ApplicationManager app) {
