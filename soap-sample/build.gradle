@@ -6,7 +6,7 @@ repositories {
 
 dependencies {
 
-    compile 'org.testng:testng:6.9.10'
+    implementation 'org.testng:testng:6.9.10'
 
 }
 
@@ -23,7 +23,6 @@ buildscript{
 apply plugin: 'no.nils.wsdl2java'
 
 wsdl2java {
-    generatedWsdlDir = file("build/generated/wsdl")
     wsdlDir = file("src/main/resources/wsdl") // define to support incremental build
     wsdlsToGenerate = [['src/main/resources/geoipservice2.wsdl']]
 }
