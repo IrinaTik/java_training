@@ -1,15 +1,19 @@
 package ru.stqa.pft.addressbook.appmanager;
 
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -36,15 +40,21 @@ public class ApplicationManager {
 
     dbHelper = new DbHelper();
 
-    if (Objects.equals(browser, BrowserType.FIREFOX)) {
-      System.setProperty("webdriver.gecko.driver", "D:\\JAVAtools\\geckodriver.exe");
-      wb = new FirefoxDriver();
-    } else if (Objects.equals(browser, BrowserType.CHROME)) {
-      System.setProperty("webdriver.chrome.driver", "D:\\JAVAtools\\chromedriver.exe");
-      wb = new ChromeDriver();
-    } else if (Objects.equals(browser, BrowserType.IE)) {
-      System.setProperty("webdriver.ie.driver", "D:\\JAVAtools\\IEDriverServer.exe");
-      wb = new InternetExplorerDriver();
+    if ("".equals(properties.getProperty("selenium.server"))) {
+      if (Objects.equals(browser, BrowserType.FIREFOX)) {
+        System.setProperty("webdriver.gecko.driver", "D:\\JAVAtools\\geckodriver.exe");
+        wb = new FirefoxDriver();
+      } else if (Objects.equals(browser, BrowserType.CHROME)) {
+        System.setProperty("webdriver.chrome.driver", "D:\\JAVAtools\\chromedriver.exe");
+        wb = new ChromeDriver();
+      } else if (Objects.equals(browser, BrowserType.IE)) {
+        System.setProperty("webdriver.ie.driver", "D:\\JAVAtools\\IEDriverServer.exe");
+        wb = new InternetExplorerDriver();
+      }
+    } else {
+      DesiredCapabilities capabilities = new DesiredCapabilities();
+      capabilities.setBrowserName(browser);
+      wb = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
     }
 
     wb.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
